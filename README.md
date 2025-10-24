@@ -1,1 +1,1 @@
-# BCT - Data & AI
+# Face Recognition Hackathon
