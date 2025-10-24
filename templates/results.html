@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verification Results - Identity Integrity Platform</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Verification Results</h1>
+            <a href="{{ url_for('index') }}" class="back-link">← Back to Home</a>
+        </header>
+
+        <div class="results-container">
+            {% if verified %}
+            <div class="result-card success">
+                <div class="result-header">
+                    <h2>✅ Identity Verified</h2>
+                    <span class="confidence-badge">Confidence: {{ matches[0].confidence * 100 | round(1) }}%</span>
+                </div>
+                <p class="result-message">{{ message }}</p>
+                
+                <div class="match-details">
+                    <h3>Matched Registration:</h3>
+                    <div class="match-info">
+                        <p><strong>Name:</strong> {{ matches[0].user_data.full_name }}</p>
+                        <p><strong>Application ID:</strong> {{ matches[0].user_data.application_id }}</p>
+                        <p><strong>Exam Type:</strong> {{ matches[0].user_data.exam_type }}</p>
+                        <p><strong>Location:</strong> {{ matches[0].user_data.location }}</p>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="result-card error">
+                <div class="result-header">
+                    <h2>❌ Identity Not Verified</h2>
+                </div>
+                <p class="result-message">{{ message }}</p>
+                
+                {% if matches %}
+                <div class="potential-matches">
+                    <h3>Potential Matches (Require Manual Review):</h3>
+                    {% for match in matches %}
+                    <div class="match-item">
+                        <p><strong>Name:</strong> {{ match.user_data.full_name }}</p>
+                        <p><strong>Confidence:</strong> {{ (match.confidence * 100) | round(1) }}%</p>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+            {% endif %}
+
+            <div class="quality-report">
+                <h3>Image Quality Assessment</h3>
+                <div class="quality-score">
+                    <span class="score-label">Quality Score:</span>
+                    <span class="score-value {{ 'good' if quality_score >= 0.7 else 'fair' if quality_score >= 0.5 else 'poor' }}">
+                        {{ (quality_score * 100) | round(1) }}%
+                    </span>
+                </div>
+                <p class="quality-feedback">{{ quality_feedback }}</p>
+            </div>
+
+            <div class="action-buttons">
+                <a href="{{ url_for('verify') }}" class="btn btn-primary">Verify Another</a>
+                <a href="{{ url_for('index') }}" class="btn btn-secondary">Return Home</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

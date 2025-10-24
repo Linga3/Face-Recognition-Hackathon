@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Identity Integrity Platform</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>AI-Powered Identity Integrity Platform</h1>
+            <p>Preventing fraudulent applications in public examinations</p>
+        </header>
+
+        <div class="hero-section">
+            <div class="hero-content">
+                <h2>Secure Examination Identity Verification</h2>
+                <p>Using advanced facial recognition technology to ensure each individual registers only once</p>
+                
+                <div class="cta-buttons">
+                    <a href="{{ url_for('register') }}" class="btn btn-primary">Register for Exam</a>
+                    <a href="{{ url_for('verify') }}" class="btn btn-secondary">Verify Identity</a>
+                </div>
+            </div>
+            
+            <div class="hero-image">
+                <div class="security-badge">
+                    <span class="badge-icon">🔒</span>
+                    <span>Facial Biometrics</span>
+                </div>
+                <div class="security-badge">
+                    <span class="badge-icon">🤖</span>
+                    <span>AI-Powered Verification</span>
+                </div>
+                <div class="security-badge">
+                    <span class="badge-icon">⚡</span>
+                    <span>Real-time Processing</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="features">
+            <div class="feature-card">
+                <h3>Duplicate Detection</h3>
+                <p>Prevent multiple registrations using the same identity</p>
+            </div>
+            <div class="feature-card">
+                <h3>Face Matching</h3>
+                <p>Advanced facial recognition with high accuracy</p>
+            </div>
+            <div class="feature-card">
+                <h3>Anomaly Detection</h3>
+                <p>Identify suspicious registration patterns</p>
+            </div>
+            <div class="feature-card">
+                <h3>Quality Assessment</h3>
+                <p>Ensure image quality for reliable verification</p>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2024 Identity Integrity Platform. Secure examination management.</p>
+        </footer>
+    </div>
+</body>
+</html>

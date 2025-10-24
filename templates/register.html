@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Identity Integrity Platform</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Exam Registration</h1>
+            <a href="{{ url_for('index') }}" class="back-link">← Back to Home</a>
+        </header>
+
+        <div class="form-container">
+            {% if error %}
+            <div class="alert alert-error">
+                {{ error }}
+            </div>
+            {% endif %}
+            
+            {% if success %}
+            <div class="alert alert-success">
+                {{ success }}
+            </div>
+            {% endif %}
+
+            <form method="POST" enctype="multipart/form-data" class="registration-form">
+                <div class="form-group">
+                    <label for="full_name">Full Name *</label>
+                    <input type="text" id="full_name" name="full_name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="application_id">Application ID *</label>
+                    <input type="text" id="application_id" name="application_id" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="age">Age *</label>
+                        <input type="number" id="age" name="age" min="16" max="100" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exam_type">Exam Type *</label>
+                        <select id="exam_type" name="exam_type" required>
+                            <option value="">Select Exam</option>
+                            <option value="civil_services">Civil Services</option>
+                            <option value="engineering">Engineering Entrance</option>
+                            <option value="medical">Medical Entrance</option>
+                            <option value="banking">Banking Exams</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="location">Location *</label>
+                    <input type="text" id="location" name="location" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="face_image">Face Photo *</label>
+                    <input type="file" id="face_image" name="face_image" accept="image/*" required 
+                           capture="user" onchange="previewImage(this)">
+                    
+                    <div class="image-requirements">
+                        <h4>Photo Requirements:</h4>
+                        <ul>
+                            <li>Clear, frontal face view</li>
+                            <li>Good lighting conditions</li>
+                            <li>No sunglasses or hats</li>
+                            <li>Neutral expression</li>
+                            <li>High resolution (min. 500x500 pixels)</li>
+                        </ul>
+                    </div>
+
+                    <div id="imagePreview" class="image-preview" style="display: none;">
+                        <img id="previewImg" src="#" alt="Preview">
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Register for Exam</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function previewImage(input) {
+            const preview = document.getElementById('imagePreview');
+            const img = document.getElementById('previewImg');
+            
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    img.src = e.target.result;
+                    preview.style.display = 'block';
+                }
+                
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+</body>
+</html>
